@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище DatabaseTestAJAXModelContainer" CdmEntityContainer="DatabaseTestAJAXEntities">
+    <EntitySetMapping Name="Companys">
+      <EntityTypeMapping TypeName="DatabaseTestAJAXModel.Companys">
+        <MappingFragment StoreEntitySet="Companys">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Licenses">
+      <EntityTypeMapping TypeName="DatabaseTestAJAXModel.Licenses">
+        <MappingFragment StoreEntitySet="Licenses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Serial" ColumnName="Serial" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="DataStart" ColumnName="DataStart" />
+          <ScalarProperty Name="DataEnd" ColumnName="DataEnd" />
+          <ScalarProperty Name="CompanysId" ColumnName="CompanysId" />
+          <ScalarProperty Name="TownsId" ColumnName="TownsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Towns">
+      <EntityTypeMapping TypeName="DatabaseTestAJAXModel.Towns">
+        <MappingFragment StoreEntitySet="Towns">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

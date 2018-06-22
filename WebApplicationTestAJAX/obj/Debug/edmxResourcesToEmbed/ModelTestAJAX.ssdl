@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище DatabaseTestAJAXModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Companys">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Licenses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Serial" Type="nvarchar" MaxLength="50" />
+    <Property Name="Number" Type="nvarchar" MaxLength="50" />
+    <Property Name="DataStart" Type="datetime" />
+    <Property Name="DataEnd" Type="datetime" />
+    <Property Name="CompanysId" Type="int" Nullable="false" />
+    <Property Name="TownsId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Towns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_CompanysLicenses">
+    <End Role="Companys" Type="Self.Companys" Multiplicity="1" />
+    <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Companys">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Licenses">
+        <PropertyRef Name="CompanysId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TownsLicenses">
+    <End Role="Towns" Type="Self.Towns" Multiplicity="1" />
+    <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Towns">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Licenses">
+        <PropertyRef Name="TownsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище DatabaseTestAJAXModelContainer">
+    <EntitySet Name="Companys" EntityType="Self.Companys" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Licenses" EntityType="Self.Licenses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Towns" EntityType="Self.Towns" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CompanysLicenses" Association="Self.FK_CompanysLicenses">
+      <End Role="Companys" EntitySet="Companys" />
+      <End Role="Licenses" EntitySet="Licenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TownsLicenses" Association="Self.FK_TownsLicenses">
+      <End Role="Towns" EntitySet="Towns" />
+      <End Role="Licenses" EntitySet="Licenses" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseTestAJAXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Companys">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Licenses" Relationship="Self.FK_CompanysLicenses" FromRole="Companys" ToRole="Licenses" />
+  </EntityType>
+  <EntityType Name="Licenses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Serial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DataStart" Type="DateTime" Precision="3" />
+    <Property Name="DataEnd" Type="DateTime" Precision="3" />
+    <Property Name="CompanysId" Type="Int32" Nullable="false" />
+    <Property Name="TownsId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Companys" Relationship="Self.FK_CompanysLicenses" FromRole="Licenses" ToRole="Companys" />
+    <NavigationProperty Name="Towns" Relationship="Self.FK_TownsLicenses" FromRole="Licenses" ToRole="Towns" />
+  </EntityType>
+  <EntityType Name="Towns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Licenses" Relationship="Self.FK_TownsLicenses" FromRole="Towns" ToRole="Licenses" />
+  </EntityType>
+  <Association Name="FK_CompanysLicenses">
+    <End Role="Companys" Type="Self.Companys" Multiplicity="1" />
+    <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Companys">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Licenses">
+        <PropertyRef Name="CompanysId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TownsLicenses">
+    <End Role="Towns" Type="Self.Towns" Multiplicity="1" />
+    <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Towns">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Licenses">
+        <PropertyRef Name="TownsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DatabaseTestAJAXEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Companys" EntityType="Self.Companys" />
+    <EntitySet Name="Licenses" EntityType="Self.Licenses" />
+    <EntitySet Name="Towns" EntityType="Self.Towns" />
+    <AssociationSet Name="FK_CompanysLicenses" Association="Self.FK_CompanysLicenses">
+      <End Role="Companys" EntitySet="Companys" />
+      <End Role="Licenses" EntitySet="Licenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TownsLicenses" Association="Self.FK_TownsLicenses">
+      <End Role="Towns" EntitySet="Towns" />
+      <End Role="Licenses" EntitySet="Licenses" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
